@@ -1,13 +1,19 @@
 ﻿using Sandbox;
+using System;
 
 [Spawnable]
-[Library( "weapon_shotgun", Title = "Shotgun" )]
-partial class Shotgun : Weapon
+[Library( "weapon_blaster", Title = "Blaster" )]
+partial class Blaster : EnergyWeapon
 {
 	public override string ViewModelPath => "weapons/rust_pumpshotgun/v_rust_pumpshotgun.vmdl";
-	public override float PrimaryRate => 1;
+	public override float PrimaryRate => 4;
 	public override float SecondaryRate => 1;
 	public override float ReloadTime => 0.5f;
+
+	public override float EnergyCost => 1;
+
+	[Net, Predicted]
+	public float Charge { get; set; } = 0f;
 
 	public override void Spawn()
 	{
@@ -18,21 +24,23 @@ partial class Shotgun : Weapon
 
 	public override void AttackPrimary()
 	{
-		TimeSincePrimaryAttack = 0;
-		TimeSinceSecondaryAttack = 0;
+		if(Charge >= 99)
+		{
+			(Owner as AnimatedEntity)?.SetAnimParameter( "b_attack", true );
 
-		(Owner as AnimatedEntity)?.SetAnimParameter( "b_attack", true );
+			//
+			// Tell the clients to play the shoot effects
+			//
+			ShootEffects();
+			PlaySound( "rust_pumpshotgun.shoot" );
 
-		//
-		// Tell the clients to play the shoot effects
-		//
-		ShootEffects();
-		PlaySound( "rust_pumpshotgun.shoot" );
-
-		//
-		// Shoot the bullets
-		//
-		ShootBullets( 10, 0.1f, 10.0f, 9.0f, 3.0f );
+			//
+			// Shoot the bullets
+			//
+			ShootBullets( 30, 0.4f, 10.0f, 9.0f, 3.0f );
+			Charge = 0;
+		}
+		
 	}
 
 	public override void AttackSecondary()
@@ -51,7 +59,25 @@ partial class Shotgun : Weapon
 		//
 		// Shoot the bullets
 		//
-		ShootBullet(0.1f, 30.0f, 40.0f, 5.0f );
+		ShootBullet(0.04f, 50.0f, 40.0f, 5.0f );
+	}
+
+	public override void Simulate( Client owner )
+	{
+		base.Simulate( owner );
+		if(Input.Down(InputButton.PrimaryAttack) && !Overheat)
+		{
+			if(Charge < 99)
+			{
+
+				Charge += Math.Min(2f, 99 - Charge);
+				DrainEnergy();
+				EnergyRechargeTimer = 0;
+			}
+		} else
+		{
+			Charge = 0;
+		}
 	}
 
 	[ClientRpc]

@@ -47,12 +47,17 @@ partial class SandboxPlayer : Player
 
 		Clothing.DressEntity( this );
 
-		Inventory.Add( new PhysGun(), true );
+		/*Inventory.Add( new PhysGun(), true );
 		Inventory.Add( new GravGun() );
 		Inventory.Add( new Tool() );
 		Inventory.Add( new Pistol() );
+		Inventory.Add( new SMG() );
+		Inventory.Add( new Shotgun() );
 		Inventory.Add( new Flashlight() );
-		Inventory.Add( new Fists() );
+		Inventory.Add( new Fists() );*/
+		Inventory.Add( new LaserGun() );
+		Inventory.Add( new Chaingun());
+		Inventory.Add( new Blaster() );
 
 		CameraMode = new FirstPersonCamera();
 

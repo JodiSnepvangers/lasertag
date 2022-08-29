@@ -17,6 +17,7 @@ public partial class SandboxHud : HudEntity<RootPanel>
 		RootPanel.AddChild<KillFeed>();
 		RootPanel.AddChild<Scoreboard<ScoreboardEntry>>();
 		RootPanel.AddChild<Health>();
+		RootPanel.AddChild<Energy>();
 		RootPanel.AddChild<InventoryBar>();
 		RootPanel.AddChild<CurrentTool>();
 		RootPanel.AddChild<SpawnMenu>();

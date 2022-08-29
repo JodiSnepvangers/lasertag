@@ -1,15 +1,15 @@
 {
-  "Title": "Laser Tag",
+  "Title": "Sandbox Game",
   "Type": "game",
-  "Org": "local",
-  "Ident": "lasertag",
+  "Org": "facepunch",
+  "Ident": "sandbox",
   "Schema": 1,
   "HasAssets": true,
   "AssetsPath": "",
   "ResourcePaths": null,
   "HasCode": true,
   "CodePath": "code",
-  "RootNamespace": "lasertag",
+  "RootNamespace": "Sandbox",
   "Metadata": {
     "MapList": [
       "facepunch.construct"

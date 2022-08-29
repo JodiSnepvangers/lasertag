@@ -205,11 +205,11 @@ public partial class Weapon : BaseWeapon, IUse
 		//
 		foreach ( var tr in TraceBullet( pos, pos + forward * 5000, bulletSize ) )
 		{
-			tr.Surface.DoBulletImpact( tr );
 
 			if ( !IsServer ) continue;
 			if ( !tr.Entity.IsValid() ) continue;
 
+			tr.Surface.DoBulletImpact( tr );
 			//
 			// We turn predictiuon off for this, so any exploding effects don't get culled etc
 			//

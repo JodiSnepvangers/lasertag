@@ -15,6 +15,26 @@ Health
 	border-radius: 10px;
 }
 
+Energy {
+	position: absolute;
+	right: 100px;
+	bottom: 138px;
+	font-size: 40px;
+	font-weight: bold;
+	color: orange;
+	height: 80px;
+	padding: 0 20px;
+	align-items: center;
+	font-family: Poppins;
+	background-color: rgba( #333, 0.4 );
+	backdrop-filter: blur( 20px );
+	border-radius: 10px;
+
+	.overheat {
+		color: red;
+	}
+}
+
 CurrentTool
 {
 	position: absolute;

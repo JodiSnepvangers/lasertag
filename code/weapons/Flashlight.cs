@@ -50,7 +50,7 @@ partial class Flashlight : Weapon
 			LinearAttenuation = 0.0f,
 			QuadraticAttenuation = 1.0f,
 			Brightness = 2,
-			Color = Color.White,
+			Color = Color.Cyan,
 			InnerConeAngle = 20,
 			OuterConeAngle = 40,
 			FogStrength = 1.0f,
